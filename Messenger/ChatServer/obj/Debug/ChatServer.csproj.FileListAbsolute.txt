@@ -1,0 +1,9 @@
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\bin\Debug\ChatServer.exe.config
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\bin\Debug\ChatServer.exe
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\bin\Debug\ChatServer.pdb
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\obj\Debug\ChatServer.csproj.AssemblyReference.cache
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\obj\Debug\ChatServer.Properties.Resources.resources
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\obj\Debug\ChatServer.csproj.GenerateResource.cache
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\obj\Debug\ChatServer.csproj.CoreCompileInputs.cache
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\obj\Debug\ChatServer.exe
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatServer\obj\Debug\ChatServer.pdb
