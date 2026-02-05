@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ChatClient.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using ChatClient.Models;
 
 namespace ChatClient.Network
 {
@@ -21,6 +23,7 @@ namespace ChatClient.Network
 
         public event Action<Message> MessageReceived;
         public event Action<string> LogMessage;
+        public event Action<List<string>> UsersListUpdated;
 
         public async Task ConnectAsync(string ip, int port, string username)
         {
@@ -129,7 +132,14 @@ namespace ChatClient.Network
                     break;
 
                 case "USERLIST":
+                    if (string.IsNullOrEmpty(content))
+                        return;
 
+                    var users = content.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                      .ToList();
+
+                    if (UsersListUpdated != null)
+                        UsersListUpdated(users);
                     break;
 
                 case "ERROR":

@@ -77,6 +77,16 @@ namespace ChatServer.Network
             if (LogMessage != null)
                 LogMessage(string.Format("[{0:HH:mm:ss}] {1}: {2}", DateTime.Now, sender, messageText));
         }
+        public async Task NotifyUserChangeAsync(string username, bool isConnected)
+        {
+            await SendUserListToAllAsync();
+
+            string action = isConnected ? "подключился" : "отключился";
+            if (LogMessage != null)
+                LogMessage(string.Format("[{0:HH:mm:ss}] {1} {2}. Всего пользователей: {3}",
+                    DateTime.Now, username, action, _clients.Count));
+        }
+
         public List<string> GetUserList()
         {
             var users = new List<string>();
@@ -93,12 +103,25 @@ namespace ChatServer.Network
         public void RemoveClient(ServerClient client)
         {
             _clients.Remove(client);
-
-            if (!string.IsNullOrEmpty(client.Username))
-            {
-                Task.Run(() => BroadcastMessageAsync("Server",
-                    string.Format("{0} disconnected", client.Username)));
-            }
         }
+        public async Task SendUserListToAllAsync()
+        {
+            var users = GetUserList();
+
+            if (users.Count == 0)
+                return; // Был баг с отправкой пустого списка, из за чего ломалось отображения пользователей
+
+            var userListString = string.Join(",", users);
+            var message = string.Format("USERLIST|{0}", userListString);
+
+            var tasks = new List<Task>();
+            foreach (var client in _clients)
+            {
+                tasks.Add(client.SendAsync(message));
+            }
+
+            await Task.WhenAll(tasks);
+        }
+
     }
 }

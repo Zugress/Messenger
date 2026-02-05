@@ -73,7 +73,8 @@ namespace ChatServer.Network
                 case "JOIN":
                     Username = content;
                     await _server.BroadcastMessageAsync("Server",
-                        string.Format("{0} connected", Username));
+                        string.Format("{0} подключился", Username));
+                    await _server.NotifyUserChangeAsync(Username, true);
                     break;
 
                 case "MESSAGE":
@@ -92,6 +93,17 @@ namespace ChatServer.Network
             {
                 _stream.Close();
                 _tcpClient.Close();
+
+                if (!string.IsNullOrEmpty(Username))
+                {
+                    Task.Run(async () =>
+                    {
+                        await _server.BroadcastMessageAsync("Server",
+                            string.Format("{0} отключился", Username));
+                        await _server.NotifyUserChangeAsync(Username, false);
+                    });
+                }
+
                 _server.RemoveClient(this);
             }
             catch { }
