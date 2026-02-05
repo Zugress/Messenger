@@ -7,3 +7,4 @@ C:\Users\Revern\source\repos\Messenger\Messenger\ChatClient\obj\Debug\ChatClient
 C:\Users\Revern\source\repos\Messenger\Messenger\ChatClient\obj\Debug\ChatClient.csproj.CoreCompileInputs.cache
 C:\Users\Revern\source\repos\Messenger\Messenger\ChatClient\obj\Debug\ChatClient.exe
 C:\Users\Revern\source\repos\Messenger\Messenger\ChatClient\obj\Debug\ChatClient.pdb
+C:\Users\Revern\source\repos\Messenger\Messenger\ChatClient\obj\Debug\ChatClient.exe.config
